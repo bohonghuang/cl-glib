@@ -21,7 +21,10 @@
 
 (cl:eval-when (:execute :compile-toplevel :load-toplevel)
   (cl:setf gir-wrapper:*quoted-name-alist* '((("MenuLinkIter" . "get_next") . menu-link-iter-peek)
-                                             (("MenuAttributeIter" . "get_next") . menu-attribute-iter-peek))))
+                                             (("MenuAttributeIter" . "get_next") . menu-attribute-iter-peek)
+                                             ("file_parse_name" . file-new-with-parse-name)
+                                             (("Volume" . "mount") . volume-start-mount)
+                                             (("Volume" . "mount_finish") . volume-finish-mount))))
 
 (gir-wrapper:define-gir-namespace "Gio")
 
