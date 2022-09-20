@@ -1,4 +1,4 @@
-;;;; package.lisp
+;;;; gio.lisp
 
 ;;;; Copyright (C) 2022 Bohong Huang
 ;;;;
