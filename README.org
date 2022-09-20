@@ -1,0 +1,3 @@
+#+TITLE: cl-gio
+
+This library serves as a dependency of [[https://github.com/bohonghuang/cl-gtk4][cl-gtk4]] to create ~Application~, requiring ~glib~ and Object Introspection installed in your system.
