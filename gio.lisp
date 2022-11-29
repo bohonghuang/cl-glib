@@ -22,11 +22,21 @@
 (in-package #:gio)
 
 (cl:eval-when (:execute :compile-toplevel :load-toplevel)
-  (cl:setf gir-wrapper:*quoted-name-alist* '((("MenuLinkIter" . "get_next") . menu-link-iter-peek)
+  (cl:setf gir-wrapper:*quoted-name-alist* `((("MenuLinkIter" . "get_next") . menu-link-iter-peek)
                                              (("MenuAttributeIter" . "get_next") . menu-attribute-iter-peek)
                                              ("file_parse_name" . file-new-with-parse-name)
                                              (("Volume" . "mount") . volume-start-mount)
-                                             (("Volume" . "mount_finish") . volume-finish-mount))))
+                                             (("Volume" . "mount_finish") . volume-finish-mount)
+                                             . ,(cl:mapcan (cl:lambda (definition)
+                                                             (cl:let ((name (cl:second definition)))
+                                                               (cl:when (cl:stringp name)
+                                                                 (cl:multiple-value-bind (replaced-name dbus-replaced-p)
+                                                                     (cl-ppcre:regex-replace-all "DBus" name "Dbus")
+                                                                   (cl:multiple-value-bind (replaced-name vtable-replaced-p)
+                                                                       (cl-ppcre:regex-replace-all "VTable" replaced-name "Vtable")
+                                                                     (cl:when (cl:or dbus-replaced-p vtable-replaced-p)
+                                                                       (cl:list (cl:cons name (gir-wrapper::camel-case->lisp-symbol replaced-name)))))))))
+                                                           (cl:cdr (cl:macroexpand '(gir-wrapper:define-gir-namespace "Gio")))))))
 
 (gir-wrapper:define-gir-namespace "Gio")
 
