@@ -27,6 +27,7 @@
                                              ("file_parse_name" . file-new-with-parse-name)
                                              (("Volume" . "mount") . volume-start-mount)
                                              (("Volume" . "mount_finish") . volume-finish-mount)
+                                             (("Application" . "run") . %application-run)
                                              . ,(cl:mapcan (cl:lambda (definition)
                                                              (cl:let ((name (cl:second definition)))
                                                                (cl:when (cl:stringp name)
@@ -39,6 +40,16 @@
                                                            (cl:cdr (cl:macroexpand '(gir-wrapper:define-gir-namespace "Gio")))))))
 
 (gir-wrapper:define-gir-namespace "Gio")
+
+(cl:defvar *application* cl:nil)
+
+(cl:export '*application*)
+
+(cl:defun application-run (application argv)
+  (cl:let ((*application* application))
+    (%application-run application argv)))
+
+(cl:export 'application-run)
 
 (cl:eval-when (:execute :compile-toplevel :load-toplevel)
   (cl:setf gir-wrapper:*quoted-name-alist* cl:nil))
