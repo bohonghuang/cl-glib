@@ -7,8 +7,9 @@
   :homepage "https://github.com/BohongHuang/cl-glib"
   :bug-tracker "https://github.com/BohongHuang/cl-glib/issues"
   :source-control (:git "https://github.com/BohongHuang/cl-glib.git")
-  :serial t
-  :components ((:file "glib"))
+  :pathname "./glib"
+  :components ((:file "package")
+               (:file "glist" :depends-on ("package")))
   :depends-on (#:cl-gobject-introspection-wrapper #:bordeaux-threads))
 
 (uiop:register-image-restore-hook

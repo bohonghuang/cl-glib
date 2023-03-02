@@ -1,4 +1,4 @@
-;;;; glib.lisp
+;;;; glib/package.lisp
 
 ;;;; Copyright (C) 2022 Bohong Huang
 ;;;;
@@ -85,16 +85,6 @@
               (cffi:callback free-object-callback)))
 
 (cl:export 'idle-add)
-
-(cl:defun funcall (function cl:&rest arguments)
-  (idle-add (cl:lambda () (cl:apply function arguments) cl:nil)))
-
-(cl:export 'funcall)
-
-(cl:defmacro with-main-event-loop (cl:&body body)
-  `(funcall (cl:lambda () ,@body)))
-
-(cl:export 'with-main-event-loop)
 
 (cl:eval-when (:execute :compile-toplevel :load-toplevel)
   (cl:setf gir-wrapper:*quoted-name-alist* cl:nil))
