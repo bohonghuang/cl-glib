@@ -17,8 +17,8 @@
 
 (cl:defpackage glib
   (:use)
-  (:import-from #:gir-wrapper #:pointer-object #:object-pointer)
-  (:export #:*ns* #:pointer-object #:object-pointer))
+  (:import-from #:gir-wrapper)
+  (:export #:*ns*))
 
 (cl:in-package #:glib)
 
