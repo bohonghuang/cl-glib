@@ -28,7 +28,8 @@
                                              ("t" . time)
                                              ("timeout_add")
                                              ("timeout_add_seconds")
-                                             ("idle_add"))))
+                                             ("idle_add")
+                                             (("Variant" . "new_variant") . make-variant))))
 
 (gir-wrapper:define-gir-namespace "GLib")
 
