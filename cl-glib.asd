@@ -3,11 +3,11 @@
   :author "Bohong Huang <1281299809@qq.com>"
   :maintainer "Bohong Huang <1281299809@qq.com>"
   :license "lgpl3"
-  :description "GLib binding for Common Lisp."
+  :description "GLib bindings for Common Lisp."
   :homepage "https://github.com/BohongHuang/cl-glib"
   :bug-tracker "https://github.com/BohongHuang/cl-glib/issues"
   :source-control (:git "https://github.com/BohongHuang/cl-glib.git")
-  :pathname "./glib"
+  :pathname "glib"
   :components ((:file "package")
                (:file "glist" :depends-on ("package")))
   :depends-on (#:cl-gobject-introspection-wrapper #:bordeaux-threads))

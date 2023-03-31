@@ -1,4 +1,4 @@
-;;;; gobject.lisp
+;;;; gobject/package.lisp
 
 ;;;; Copyright (C) 2022-2023 Bohong Huang
 ;;;;
@@ -23,3 +23,8 @@
 (cl:in-package #:gobj)
 
 (gir-wrapper:define-gir-namespace "GObject")
+
+(cl:defun coerce (object type)
+  (pointer-object (object-pointer object) type))
+
+(cl:export 'coerce)
