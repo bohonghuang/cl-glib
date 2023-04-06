@@ -44,15 +44,15 @@
   (bt:with-lock-held (*objects-lock*)
     (cl:remhash (cffi:pointer-address user-data) *objects*)))
 
-(cl:defconstant +1+maxsizet+ (cl:expt 2 (cl:- (cl:* 8 (cffi:foreign-type-size :pointer)) #+sbcl 2)))
+(cl:defconstant +1+maxsizet+ (cl:min (cl:expt 2 (cl:* 8 (cffi:foreign-type-size :pointer))) (cl:1+ cl:most-positive-fixnum)))
 
-(cl:deftype unsigned-word ()
+(cl:deftype unsigned-unboxed-word ()
   `(cl:integer 0 ,(cl:1- +1+maxsizet+)))
 
 (cl:defun put-object (object)
   (bt:with-lock-held (*objects-lock*)
     (cl:loop
-       :with object-id :of-type unsigned-word := 0
+       :with object-id :of-type unsigned-unboxed-word := 0
        :do (cl:setf object-id (cl:random +1+maxsizet+))
        :while (cl:gethash object-id *objects*)
        :finally

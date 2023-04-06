@@ -16,6 +16,7 @@
 ;;;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 (cl:defpackage gobject
+  (:use)
   (:nicknames #:gobj)
   (:import-from #:gir-wrapper #:pointer-object #:object-pointer)
   (:export #:*ns* #:pointer-object #:object-pointer))
