@@ -59,6 +59,10 @@
           (cl:setf (cl:gethash object-id *objects*) object)
           (cl:return object-id))))
 
+(cl:defun get-object (id)
+  (bt:with-lock-held (*objects-lock*)
+    (cl:gethash id *objects*)))
+
 (cl:defun timeout-add (interval function cl:&optional (priority +priority-default+))
   (gir:invoke (*ns* 'timeout-add)
               priority
